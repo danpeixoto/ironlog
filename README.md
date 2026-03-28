@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# IronLog
 
-## Getting Started
+App web para registrar treinos, acompanhar progresso e sugerir cargas com base na sua configuração. **Sem backend**: tudo fica no `localStorage` do navegador.
 
-First, run the development server:
+## Stack
+
+- Next.js 15 (App Router), TypeScript, Tailwind CSS
+- [shadcn/ui](https://ui.shadcn.com/) + lucide-react
+- Deploy recomendado: [Vercel](https://vercel.com)
+
+## Instalação
+
+```bash
+npm install
+```
+
+## Desenvolvimento local
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build de produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Deploy na Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Envie o projeto para um repositório Git (GitHub, GitLab ou Bitbucket).
+2. Na Vercel: **Add New Project** → importe o repositório.
+3. Framework: **Next.js** (detectado automaticamente).
+4. Não são necessárias variáveis de ambiente para o MVP.
+5. Deploy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Os dados continuam **apenas no navegador** de cada usuário; nada é persistido no servidor.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Comando       | Descrição        |
+| ------------- | ---------------- |
+| `npm run dev` | Servidor de dev  |
+| `npm run build` | Build produção |
+| `npm run start` | Servir build   |
+| `npm run lint`  | ESLint         |
