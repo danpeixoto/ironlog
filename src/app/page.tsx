@@ -38,7 +38,7 @@ export default function HomePage() {
 
       {!today && (
         <p className="rounded-lg border border-border/60 bg-muted/30 px-3 py-2 text-sm text-muted-foreground">
-          Hoje é Domingo — descanso ou mobilidade. Sem treino agendado.
+          Hoje é dia de descanso. Aproveite para mobilidade, caminhada leve ou recuperação.
         </p>
       )}
 

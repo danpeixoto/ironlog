@@ -41,7 +41,8 @@ export function ExerciseSeriesTable({
   onToggleSet,
   disabled,
 }: ExerciseSeriesTableProps) {
-  const missing = baseKg <= 0;
+  const bodyweight = !!exercise.isBodyweight;
+  const missing = !bodyweight && baseKg <= 0;
 
   return (
     <div className="overflow-x-auto rounded-lg border border-border/60">
@@ -78,9 +79,14 @@ export function ExerciseSeriesTable({
                   className={cn(
                     "font-medium",
                     missing && "text-yellow-800",
+                    bodyweight && "text-muted-foreground",
                   )}
                 >
-                  {missing ? "Configure" : rowWeight(set, baseKg)}
+                  {bodyweight
+                    ? "Peso corporal"
+                    : missing
+                      ? "Configure"
+                      : rowWeight(set, baseKg)}
                 </TableCell>
                 <TableCell>
                   <Badge variant="outline" className="font-normal">

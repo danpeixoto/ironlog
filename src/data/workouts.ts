@@ -1,328 +1,173 @@
-import type { WorkoutDay } from "@/types/workout";
+import type { ExerciseSet, WorkoutDay } from "@/types/workout";
 
 const R = {
-  s40: 40,
   s60: 60,
-  s75: 75,
   s90: 90,
-  s120: 120,
-  s180: 180,
-  s240: 240,
 } as const;
+
+/** 3 séries válidas com mesma faixa de reps e mesmo descanso. */
+function workSets(reps: string, restAfterSeconds: number): ExerciseSet[] {
+  return [
+    { kind: "work", reps, restAfterSeconds },
+    { kind: "work", reps, restAfterSeconds },
+    { kind: "work", reps, restAfterSeconds },
+  ];
+}
 
 export const WORKOUT_DAYS: WorkoutDay[] = [
   {
     slug: "segunda",
-    label: "Segunda-feira",
-    muscleGroups: ["Peito", "Ombro frontal"],
+    label: "A — Peito + Tríceps",
+    muscleGroups: ["Peito", "Tríceps"],
     exercises: [
       {
-        id: "segunda-fly",
-        name: "Fly",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s40 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-        ],
+        id: "a-supino-reto-barra",
+        name: "Supino reto com barra",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "segunda-supino-reto",
-        name: "Supino reto",
-        sets: [
-          { kind: "recognition", reps: "12", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "6-8", restAfterSeconds: R.s120 },
-        ],
+        id: "a-supino-inclinado-halter",
+        name: "Supino inclinado com halter",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "segunda-supino-hammer",
-        name: "Supino hammer inclinado máquina",
-        sets: [
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s120 },
-        ],
+        id: "a-peck-deck",
+        name: "Peck deck",
+        note: "Alternativa: crucifixo com halter.",
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "segunda-desenvolvimento",
-        name: "Desenvolvimento",
-        note: "Preferência no smith; pode ser com halter.",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-        ],
+        id: "a-triceps-pulley",
+        name: "Tríceps pulley",
+        sets: workSets("8-12", R.s60),
+      },
+      {
+        id: "a-triceps-frances-halter",
+        name: "Tríceps francês com halter",
+        sets: workSets("8-12", R.s60),
+      },
+      {
+        id: "a-flexao",
+        name: "Flexão",
+        note: "Até a falha. 3 séries.",
+        isBodyweight: true,
+        sets: workSets("até falhar", R.s90),
       },
     ],
   },
   {
     slug: "terca",
-    label: "Terça-feira",
-    muscleGroups: ["Costas"],
+    label: "B — Costas + Bíceps",
+    muscleGroups: ["Costas", "Bíceps"],
     exercises: [
       {
-        id: "terca-puxada",
-        name: "Puxada alta aberta",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s40 },
-          { kind: "recognition", reps: "12", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-        ],
+        id: "b-puxada-alta-frente",
+        name: "Puxada alta na frente",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "terca-remada-cav",
-        name: "Remada cavalinho máquina",
-        note: "Pegada neutra com as duas mãos; foco em esmagar o meio das costas.",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-        ],
+        id: "b-remada-baixa-polia",
+        name: "Remada baixa na polia",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "terca-remada-baixa",
-        name: "Remada baixa triângulo",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-        ],
+        id: "b-remada-maquina-articulada",
+        name: "Remada máquina articulada",
+        note: "Alternativa: remada cavalinho.",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "terca-banco-romano",
-        name: "Banco romano",
-        note: "Foco em hiperextensão lombar; não glúteos/posterior.",
-        sets: [
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "quarta",
-    label: "Quarta-feira",
-    muscleGroups: ["Bíceps", "Tríceps", "Ombro lateral"],
-    exercises: [
-      {
-        id: "quarta-pulley-w",
-        name: "Pulley barra W",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s60 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-        ],
+        id: "b-pulldown-reto",
+        name: "Pulldown reto na polia",
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "quarta-rosca-martelo",
-        name: "Rosca martelo",
-        sets: [
-          { kind: "recognition", reps: "12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-        ],
+        id: "b-rosca-direta-w",
+        name: "Rosca direta barra W",
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "quarta-frances",
-        name: "Francês",
-        note: "Preferir halter sentado com apoio nas costas.",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-        ],
-      },
-      {
-        id: "quarta-scott",
-        name: "Scott máquina",
-        note: "Menos carga e mais contração máxima do bíceps.",
-        sets: [
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s75 },
-        ],
-      },
-      {
-        id: "quarta-elev-lateral",
-        name: "Elevação lateral",
-        sets: [
-          { kind: "recognition", reps: "15", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-        ],
+        id: "b-rosca-martelo-halter",
+        name: "Rosca martelo com halter",
+        sets: workSets("8-12", R.s60),
       },
     ],
   },
   {
     slug: "quinta",
-    label: "Quinta-feira",
-    muscleGroups: ["Pernas"],
+    label: "C — Perna",
+    muscleGroups: ["Quadríceps", "Posterior", "Panturrilha"],
     exercises: [
       {
-        id: "quinta-agacho",
+        id: "c-agachamento-livre",
         name: "Agachamento livre",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s90 },
-          {
-            kind: "percentage",
-            reps: "12",
-            percentage: 60,
-            restAfterSeconds: R.s120,
-          },
-          {
-            kind: "percentage",
-            reps: "10",
-            percentage: 80,
-            restAfterSeconds: R.s120,
-          },
-          {
-            kind: "percentage",
-            reps: "8",
-            percentage: 90,
-            restAfterSeconds: R.s180,
-          },
-          { kind: "work", reps: "5-6", restAfterSeconds: R.s180 },
-          { kind: "work", reps: "5-6", restAfterSeconds: R.s180 },
-          { kind: "work", reps: "5-6", restAfterSeconds: R.s180 },
-        ],
+        note: "Se tiver insegurança, começar no smith.",
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "quinta-mesa-flexora",
-        name: "Mesa flexora",
-        sets: [
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-        ],
-      },
-      {
-        id: "quinta-leg-press",
+        id: "c-leg-press",
         name: "Leg press",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s120 },
-        ],
+        sets: workSets("8-12", R.s90),
       },
       {
-        id: "quinta-cadeira-ext",
+        id: "c-cadeira-extensora",
         name: "Cadeira extensora",
-        note: "Menos carga e mais reps buscando dor total.",
-        sets: [
-          { kind: "work", reps: "15-20", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "15-20", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "15-20", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "15-20", restAfterSeconds: R.s75 },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "sexta",
-    label: "Sexta-feira",
-    muscleGroups: ["Ombro", "Peito"],
-    exercises: [
-      {
-        id: "sexta-desenvolvimento",
-        name: "Desenvolvimento",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s90 },
-        ],
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "sexta-elev-frontal",
-        name: "Elevação frontal",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-        ],
+        id: "c-mesa-flexora",
+        name: "Mesa flexora",
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "sexta-elev-lateral",
-        name: "Elevação lateral",
-        sets: [
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-          { kind: "work", reps: "8-10", restAfterSeconds: R.s75 },
-        ],
+        id: "c-panturrilha-sentado",
+        name: "Panturrilha sentado",
+        sets: workSets("8-12", R.s60),
       },
       {
-        id: "sexta-crucifixo",
-        name: "Crucifixo no fly",
-        sets: [
-          { kind: "recognition", reps: "15", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-          { kind: "work", reps: "10-12", restAfterSeconds: R.s90 },
-        ],
+        id: "c-panturrilha-em-pe",
+        name: "Panturrilha em pé",
+        sets: workSets("8-12", R.s60),
       },
     ],
   },
   {
     slug: "sabado",
-    label: "Sábado",
-    muscleGroups: ["Levantamento terra"],
+    label: "D — Ombro + Trapézio + Abdômen",
+    muscleGroups: ["Ombro", "Trapézio", "Abdômen"],
     exercises: [
       {
-        id: "sabado-terra",
-        name: "Levantamento terra",
-        note: "Descanso entre séries: 3–4 min nas séries pesadas.",
-        sets: [
-          { kind: "warmup", reps: "15", restAfterSeconds: R.s120 },
-          {
-            kind: "percentage",
-            reps: "12",
-            percentage: 50,
-            restAfterSeconds: R.s180,
-          },
-          {
-            kind: "percentage",
-            reps: "8-10",
-            percentage: 70,
-            restAfterSeconds: R.s180,
-          },
-          {
-            kind: "percentage",
-            reps: "6",
-            percentage: 90,
-            restAfterSeconds: R.s240,
-          },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s240 },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s240 },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s240 },
-          { kind: "work", reps: "4-6", restAfterSeconds: R.s240 },
-        ],
+        id: "d-desenvolvimento-halter",
+        name: "Desenvolvimento com halter",
+        sets: workSets("8-12", R.s90),
+      },
+      {
+        id: "d-elevacao-lateral",
+        name: "Elevação lateral",
+        sets: workSets("8-12", R.s60),
+      },
+      {
+        id: "d-elevacao-frontal",
+        name: "Elevação frontal",
+        sets: workSets("8-12", R.s60),
+      },
+      {
+        id: "d-encolhimento-trapezio",
+        name: "Encolhimento para trapézio",
+        sets: workSets("8-12", R.s60),
+      },
+      {
+        id: "d-abdomen-infra",
+        name: "Abdômen infra",
+        isBodyweight: true,
+        sets: workSets("12-15", R.s60),
+      },
+      {
+        id: "d-prancha",
+        name: "Prancha",
+        note: "Isometria; manter de 30s a 60s por série.",
+        isBodyweight: true,
+        sets: workSets("30-60s", R.s60),
       },
     ],
   },
@@ -334,16 +179,19 @@ export function getWorkoutBySlug(slug: string): WorkoutDay | undefined {
   return WORKOUT_DAYS.find((d) => d.slug === slug);
 }
 
-/** Domingo (0) → null; Segunda (1) … Sábado (6) → slug do treino. */
+/**
+ * Cronograma ideal:
+ *  Seg=A · Ter=B · Qua=descanso · Qui=C · Sex=descanso · Sáb=D · Dom=descanso.
+ */
 export function getTodayWorkoutSlug(): string | null {
   const day = new Date().getDay();
   const map: Record<number, string | null> = {
     0: null,
     1: "segunda",
     2: "terca",
-    3: "quarta",
+    3: null,
     4: "quinta",
-    5: "sexta",
+    5: null,
     6: "sabado",
   };
   const slug = map[day];

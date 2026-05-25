@@ -29,7 +29,7 @@ export function ExerciseCard({
   onSessionChange,
   disabled,
 }: ExerciseCardProps) {
-  const missingWeight = baseKg <= 0;
+  const missingWeight = !exercise.isBodyweight && baseKg <= 0;
 
   const allSetsDone = useMemo(() => {
     return exercise.sets.every((_, i) => session.setDone[sessionSetKey(exercise.id, i)]);

@@ -15,6 +15,8 @@ export type Exercise = {
   name: string;
   note?: string;
   sets: ExerciseSet[];
+  /** Exercício de peso corporal: não exige carga base configurada. */
+  isBodyweight?: boolean;
 };
 
 export type WorkoutDay = {

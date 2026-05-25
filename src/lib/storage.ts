@@ -1,5 +1,4 @@
 import type { WeightConfig } from "@/types/workout";
-import { CONFIGURABLE_EXERCISES } from "@/data/exercises";
 
 export const STORAGE_KEY = "ironlog:v1";
 
@@ -59,46 +58,6 @@ export function savePersistedState(state: PersistedState): void {
 
 export function resetAll(): void {
   savePersistedState(defaultPersistedState());
-}
-
-/** Pesos de exemplo (kg) para preencher a lista fixa. */
-const EXAMPLE_WEIGHTS: Record<string, number> = {
-  Fly: 14,
-  "Supino reto": 60,
-  "Supino hammer inclinado máquina": 45,
-  Desenvolvimento: 40,
-  "Puxada alta aberta": 50,
-  "Remada cavalinho máquina": 55,
-  "Remada baixa triângulo": 45,
-  "Banco romano": 25,
-  "Pulley barra W": 25,
-  "Rosca martelo": 14,
-  Francês: 20,
-  "Scott máquina": 20,
-  "Elevação lateral": 8,
-  "Agachamento livre": 100,
-  "Mesa flexora": 35,
-  "Leg press": 140,
-  "Cadeira extensora": 40,
-  "Elevação frontal": 12,
-  "Crucifixo no fly": 12,
-  "Levantamento terra": 120,
-};
-
-export function seedExampleWeights(): PersistedState {
-  const state = loadPersistedState();
-  const next = { ...state, weights: { ...state.weights } };
-  for (const name of CONFIGURABLE_EXERCISES) {
-    const base = EXAMPLE_WEIGHTS[name];
-    if (base == null) continue;
-    next.weights[name] = {
-      exerciseName: name,
-      baseKg: base,
-      unit: "kg",
-    };
-  }
-  savePersistedState(next);
-  return next;
 }
 
 export function emptySession(): WorkoutSessionState {

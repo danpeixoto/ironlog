@@ -6,11 +6,7 @@ import { toast } from "sonner";
 import { CONFIGURABLE_EXERCISES } from "@/data/exercises";
 import type { WeightConfig } from "@/types/workout";
 import { usePersistedAppState } from "@/hooks/use-persisted-app-state";
-import {
-  defaultPersistedState,
-  resetAll,
-  seedExampleWeights,
-} from "@/lib/storage";
+import { defaultPersistedState, resetAll } from "@/lib/storage";
 import { WeightConfigForm } from "@/components/WeightConfigForm";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,13 +42,6 @@ export default function ConfiguracoesPage() {
     toast.success("Todos os dados foram apagados.");
   };
 
-  const handleSeed = () => {
-    const next = seedExampleWeights();
-    update(() => next);
-    setFormKey((k) => k + 1);
-    toast.success("Pesos de exemplo aplicados.");
-  };
-
   if (!mounted) {
     return <p className="text-muted-foreground">Carregando…</p>;
   }
@@ -67,9 +56,6 @@ export default function ConfiguracoesPage() {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        <Button type="button" variant="secondary" onClick={handleSeed}>
-          Preencher pesos exemplo
-        </Button>
         <Button type="button" variant="destructive" onClick={() => setResetOpen(true)}>
           Resetar dados
         </Button>
